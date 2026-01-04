@@ -10,39 +10,38 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "21.10.1"
 
-  cluster_name    = local.name
-  cluster_version = "1.34"
+  name    = local.name
+  kubernetes_version = "1.34"
 
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.public_subnets
-  cluster_endpoint_public_access = true
+  endpoint_public_access = true
 
-  cluster_addons = {
+  addons = {
     aws-ebs-csi-driver = {
       most_recent = true
     }
   }
 
-  eks_managed_node_group_defaults = {
-    ami_type = "AL2_x86_64"
-  }
+
 
   eks_managed_node_groups = {
     consul = {
-      name = "consul"
-
+      name           = "consul"
       instance_types = ["c5d.large"]
+      ami_type       = "AL2_x86_64" # consider AL2023 for newer clusters if you prefer
 
       min_size     = 1
       max_size     = 5
       desired_size = 3
 
-      # Needed by the aws-ebs-csi-driver
       iam_role_additional_policies = {
         AmazonEBSCSIDriverPolicy = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
       }
     }
   }
+
+  
 
   node_security_group_additional_rules = {
     ingress_self_all = {

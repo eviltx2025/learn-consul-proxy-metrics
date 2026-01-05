@@ -21,13 +21,13 @@ variable "vpc_region" {
 variable "consul_version" {
   type        = string
   description = "The Consul version"
-  default     = "1.16.1"
+  default     = "1.18.0"
 }
 
 variable "consul_chart_version" {
   type        = string
   description = "The Consul Helm chart version to use"
-  default     = "1.2.1"
+  default     = "1.4.1"
 }
 
 variable "datacenter" {
@@ -49,13 +49,13 @@ variable "consul_helm_filename" {
 variable "prometheus_chart_version" {
   type        = string
   description = "The prometheus Helm chart version to use"
-  default     = "23.3.0"
+  default     = "25.24.0"
 }
 
 variable "grafana_chart_version" {
   type        = string
   description = "The grafana Helm chart version to use"
-  default     = "6.58.9"
+  default     = "7.8.0"
 }
 
 ################################################################################

@@ -6,19 +6,19 @@ terraform {
     }
     hcp = {
       source  = "hashicorp/hcp"
-      version = ">= 0.110"
+      version = ">= 0.112"
     }
     consul = {
       source = "hashicorp/consul"
-      version = ">= 2.22"
+      version = ">= 2.23"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = ">= 3.0"
+      version = ">= 3.1"
     }
     helm = {
       source  = "hashicorp/helm"
-      version = ">= 3.1"
+      version = ">= 3.2"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"

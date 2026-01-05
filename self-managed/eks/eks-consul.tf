@@ -19,9 +19,7 @@ resource "helm_release" "consul" {
   ]
 
   depends_on = [module.eks,
-                module.eks.eks_managed_node_groups,
                 kubernetes_namespace.consul,
-                module.eks.aws_eks_addon,
                 module.vpc
                 ]
 }

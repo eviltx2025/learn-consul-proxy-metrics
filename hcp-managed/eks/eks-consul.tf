@@ -16,7 +16,7 @@ resource "kubernetes_secret" "consul_bootstrap_token" {
     token = "${data.aws_secretsmanager_secret_version.bootstrap_token.secret_string}"
   }
 
-  depends_on = [module.eks.eks_managed_node_groups, 
+  depends_on = [module.eks, 
                 kubernetes_namespace.consul
                ]
 
@@ -43,8 +43,7 @@ resource "helm_release" "consul" {
     })
   ]
 
-  depends_on = [module.eks.eks_managed_node_groups,
-                module.eks.aws_eks_addon,
+  depends_on = [module.eks,
                 kubernetes_namespace.consul, 
                 aws_secretsmanager_secret.bootstrap_token, 
                 aws_secretsmanager_secret.ca_cert,

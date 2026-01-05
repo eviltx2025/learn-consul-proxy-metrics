@@ -17,8 +17,7 @@ resource "helm_release" "prometheus" {
     templatefile("${path.module}/helm/prometheus.yaml", {})
   ]
 
-  depends_on = [module.eks.eks_managed_node_groups,
-                module.eks.aws_eks_addon,
+  depends_on = [module.eks,
                 kubernetes_namespace.observability,
                 module.vpc,
                 helm_release.consul
@@ -37,8 +36,7 @@ resource "helm_release" "grafana" {
     templatefile("${path.module}/helm/grafana.yaml", {})
   ]
 
-  depends_on = [module.eks.eks_managed_node_groups,
-                module.eks.aws_eks_addon,
+  depends_on = [module.eks,
                 kubernetes_namespace.observability,
                 module.vpc,
                 helm_release.consul,

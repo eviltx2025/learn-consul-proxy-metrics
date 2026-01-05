@@ -18,6 +18,10 @@ module "eks" {
 
   cluster_endpoint_public_access = true
 
+  # Grant cluster creator (the Terraform identity) admin permissions so Terraform can
+  # manage Kubernetes resources (namespaces, helm releases, etc.)
+  enable_cluster_creator_admin_permissions = true
+
   cluster_addons = {
     aws-ebs-csi-driver = {
       most_recent = true

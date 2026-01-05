@@ -1,9 +1,11 @@
 data "aws_eks_cluster" "cluster" {
-  name = module.eks.cluster_name
+  name       = module.eks.cluster_name
+  depends_on = [module.eks]
 }
 
 data "aws_eks_cluster_auth" "cluster" {
-  name = module.eks.cluster_name
+  name       = module.eks.cluster_name
+  depends_on = [module.eks]
 }
 
 module "eks" {
@@ -29,7 +31,7 @@ module "eks" {
     consul = {
       name           = "consul"
       instance_types = ["c5d.large"]
-      ami_type       = "AL2_x86_64" # consider AL2023 for newer clusters if you prefer
+      ami_type       = "AL2023_x86_64_STANDARD"
 
       min_size     = 1
       max_size     = 5
@@ -41,7 +43,7 @@ module "eks" {
     }
   }
 
-  
+
 
   node_security_group_additional_rules = {
     ingress_self_all = {
